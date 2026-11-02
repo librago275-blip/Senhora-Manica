@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080817">
+    <title>Entre o Zero e o Infinito ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="backgroundCanvas"></canvas>
+
+<main id="app">
+
+    <!-- INTRO -->
+    <section class="scene active" id="intro">
+        <div class="content">
+            <div class="mini-title">UMA HISTÓRIA EM FORMA DE POSSIBILIDADE</div>
+            <h1>Entre o Zero<br>e o Infinito</h1>
+            <p>Algumas coisas são difíceis de explicar. Outras são ainda mais difíceis de dizer.</p>
+            <div class="equation intro-equation">0 → ∞</div>
+            <button class="btn" onclick="startExperience()">COMEÇAR ❤️</button>
+        </div>
+    </section>
+
+    <!-- ENIGMAS -->
+    <section class="scene" id="riddles">
+        <div class="content">
+            <div class="mini-title">ANTES DE DESCOBRIR O RESTO</div>
+            <div class="counter" id="counter">ENIGMA 1 DE 7</div>
+            <div class="progress-track">
+                <div id="progressBar"></div>
+            </div>
+
+            <h2 id="riddleQuestion"></h2>
+            <p id="riddleHint" class="hint"></p>
+
+            <input
+                id="answerInput"
+                type="text"
+                placeholder="Escreva a resposta..."
+                autocomplete="off"
+                autocapitalize="off"
+            >
+
+            <button class="btn" id="answerButton" onclick="checkAnswer()">
+                RESPONDER
+            </button>
+
+            <div id="feedback" aria-live="polite"></div>
+        </div>
+    </section>
+
+    <!-- SEGUNDA NARRAÇÃO -->
+    <section class="scene narration-scene" id="revelation">
+        <div class="content narration-content">
+            <div class="mini-title">UMA HISTÓRIA QUE COMEÇOU COMO AMIZADE</div>
+
+            <h1>Há coisas que começam sem avisar...</h1>
+
+            <div class="voice-orb" id="revelationOrb">
+                <span>♫</span>
+            </div>
+
+            <div id="revelationText" class="typed-narration"></div>
+
+            <audio
+                id="revelationAudio"
+                src="revelacao.mp3"
+                preload="auto"
+            ></audio>
+
+            <button
+                class="btn"
+                id="revelationButton"
+                onclick="playRevelation()"
+            >
+                OUVIR A SEGUNDA MENSAGEM ♫
+            </button>
+
+            <p class="voice-note" id="revelationStatus" aria-live="polite">
+                A minha segunda mensagem começa aqui...
+            </p>
+
+            <button class="btn secondary" onclick="goTo('narration')">
+                CONTINUAR ❤️
+            </button>
+        </div>
+    </section>
+
+    <!-- PRIMEIRA NARRAÇÃO -->
+    <section class="scene narration-scene" id="narration">
+        <div class="content narration-content">
+            <div class="mini-title">UMA COISA QUE QUERO QUE SAIBAS</div>
+            <h1>Deixa-me explicar...</h1>
+
+            <div class="voice-orb" id="voiceOrb">
+                <span>♫</span>
+            </div>
+
+            <div id="narrationText" class="typed-narration"></div>
+
+            <audio
+                id="voiceAudio"
+                src="minha-voz.mp3"
+                preload="auto"
+            ></audio>
+
+            <button
+                class="btn"
+                id="voiceButton"
+                onclick="playNarration()"
+            >
+                OUVIR A MINHA VOZ ♫
+            </button>
+
+            <p class="voice-note" id="voiceStatus" aria-live="polite">
+                A minha mensagem começa aqui...
+            </p>
+
+            <button class="btn secondary" onclick="goTo('zero')">
+                CONTINUAR
+            </button>
+        </div>
+    </section>
+
+    <!-- ZERO -->
+    <section class="scene math-scene" id="zero">
+        <div class="math-symbol symbol-zero">0</div>
+
+        <div class="content">
+            <div class="mini-title">PRIMEIRO, O ZERO</div>
+
+            <h1>Às vezes, aquilo que parece nada tem o poder de mudar tudo.</h1>
+
+            <div class="formula-card">
+                <div class="formula">7 × 0 = 0</div>
+                <div class="formula-description">
+                    O zero pode transformar qualquer multiplicação em zero.
+                </div>
+            </div>
+
+            <div class="formula-card">
+                <div class="formula">10 → 100 → 1000</div>
+                <div class="formula-description">
+                    Mas, colocado na posição certa, também pode aumentar o valor.
+                </div>
+            </div>
+
+            <p class="pink">
+                Talvez algumas pessoas tenham esse mesmo poder:
+                parecem não fazer diferença, até percebermos
+                o quanto mudaram tudo.
+            </p>
+
+            <button class="btn" onclick="goTo('root')">CONTINUAR</button>
+        </div>
+    </section>
+
+    <!-- RAIZ QUADRADA -->
+    <section class="scene math-scene" id="root">
+        <div class="math-symbol root-symbol">√</div>
+
+        <div class="content">
+            <div class="mini-title">DEPOIS, A RAIZ QUADRADA</div>
+
+            <h1>Há coisas das quais não conseguimos sair facilmente.</h1>
+
+            <div class="formula-card">
+                <div class="formula">√x</div>
+                <div class="formula-description">
+                    Uma expressão simples à primeira vista, mas que esconde uma incógnita.
+                </div>
+            </div>
+
+            <div class="formula-card">
+                <div class="formula">x² = 25</div>
+                <div class="formula-description">
+                    Existem respostas para algumas equações, mas nem todas as perguntas da vida são resolvidas com números.
+                </div>
+            </div>
+
+            <p class="pink">
+                E você é essa incógnita que eu continuo tentando compreender.
+            </p>
+
+            <button class="btn" onclick="goTo('possibilityIntro')">CONTINUAR</button>
+        </div>
+    </section>
+
+    <!-- INTRODUÇÃO ÀS POSSIBILIDADES -->
+    <section class="scene" id="possibilityIntro">
+        <div class="content">
+            <div class="mini-title">UMA EQUAÇÃO SEM RESPOSTA EXATA</div>
+
+            <h1>E se tudo pudesse ser diferente?</h1>
+
+            <p>
+                Às vezes, a mente cria tantas possibilidades que até uma
+                simples decisão parece uma equação.
+            </p>
+
+            <div class="equation">P(A) = ?</div>
+
+            <button class="btn" onclick="startPossibilities()">DESCOBRIR</button>
+        </div>
+    </section>
+
+    <!-- EXPLOSÃO DAS POSSIBILIDADES -->
+    <section class="scene possibility-scene" id="possibilities">
+        <div class="possibility-title">E SE...</div>
+
+        <div id="orb"></div>
+        <div id="shockwave"></div>
+        <div id="possibilityCloud"></div>
+
+        <div id="possibilityFinal" class="hidden">
+            <h2>Entre tantas possibilidades...</h2>
+
+            <p>
+                Talvez eu só quisesse encontrar coragem para dizer o que sinto.
+            </p>
+
+            <button class="btn" onclick="goTo('psychologist')">
+                CONTINUAR
+            </button>
+        </div>
+    </section>
+
+    <!-- CONTEXTO DA PSICÓLOGA -->
+    <section class="scene" id="psychologist">
+        <div class="content">
+            <div class="mini-title">UMA CONVERSA QUE FICOU NA MEMÓRIA</div>
+
+            <h2>
+                Lembras daquela vez que eu queria te pedir algo grande,
+                mas não consegui?
+            </h2>
+
+            <p>Eu tinha pensado em te pedir para seres minha namorada por um dia.</p>
+
+            <p class="pink">Mas não consegui dizer.</p>
+
+            <button class="btn" onclick="goTo('psychologist2')">
+                CONTINUAR
+            </button>
+        </div>
+    </section>
+
+    <!-- SEGUNDA CENA DA PSICÓLOGA -->
+    <section class="scene" id="psychologist2">
+        <div class="content">
+            <div class="mini-title">O QUE FICOU POR DIZER</div>
+
+            <h1>Às vezes, até quem pensa demais fica sem palavras.</h1>
+
+            <p>
+                Durante uma conversa com um psicólogo, a minha mãe falou
+                sobre mim e sobre algumas coisas que eu ainda não tinha
+                conseguido expressar.
+            </p>
+
+            <p class="pink">E você fazia parte dessa história.</p>
+
+            <button class="btn" onclick="goTo('psychologistVideoIntro')">
+                CONTINUAR
+            </button>
+        </div>
+    </section>
+
+    <!-- INTRODUÇÃO DO VÍDEO DA PSICÓLOGA -->
+    <section class="scene" id="psychologistVideoIntro">
+        <div class="content">
+            <div class="mini-title">UMA RECORDAÇÃO</div>
+
+            <h1>Quero mostrar-te uma coisa.</h1>
+
+            <p>Presta atenção a este pequeno momento antes de continuarmos.</p>
+
+            <button class="btn" onclick="goTo('psychologistVideo')">
+                VER VÍDEO
+            </button>
+        </div>
+    </section>
+
+    <!-- VÍDEO DA PSICÓLOGA -->
+    <section class="scene video-scene" id="psychologistVideo">
+        <video
+            id="psychologistVideoPlayer"
+            class="scene-video"
+            controls
+            playsinline
+        >
+            <source src="video-psicologa.mp4" type="video/mp4">
+        </video>
+
+        <button
+            class="btn video-next"
+            onclick="continueFromPsychologistVideo()"
+        >
+            CONTINUAR
+        </button>
+    </section>
+
+    <!-- PERGUNTA -->
+    <section class="scene" id="question">
+        <div class="content">
+            <div class="mini-title">UMA PERGUNTA, SEM PRESSA</div>
+
+            <div class="equation">x = ?</div>
+
+            <h1>E se déssemos uma oportunidade a esta possibilidade?</h1>
+
+            <p>
+                Não quero que te sintas pressionada. Só queria deixar
+                de guardar tudo como uma incógnita.
+            </p>
+
+            <button class="btn" onclick="goTo('finalQuestion')">
+                CONTINUAR
+            </button>
+        </div>
+    </section>
+
+    <!-- PERGUNTA FINAL -->
+    <section class="scene" id="finalQuestion">
+        <div class="content">
+            <div class="mini-title">SEM PRESSA. SEM PRESSÃO.</div>
+
+            <h1>Gostarias de descobrir comigo uma possibilidade?</h1>
+
+            <p>
+                Não é uma exigência nem uma cobrança.
+                É apenas uma pergunta honesta.
+            </p>
+
+            <div class="button-row">
+                <button class="btn" onclick="answerYes()">SIM ❤️</button>
+                <button class="btn secondary" onclick="answerNo()">NÃO</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- TÚNEL 3D -->
+    <section class="scene tunnel-scene" id="dramaticEntry">
+        <div class="tunnel-caption">
+            UMA POSSIBILIDADE ENTRE O ZERO E O INFINITO
+        </div>
+
+        <div class="tunnel-perspective">
+            <div class="tunnel" id="photoTunnel">
+                <div class="tunnel-end"></div>
+            </div>
+        </div>
+
+        <div class="tunnel-message">
+            Algumas coisas merecem ser vistas de perto.
+        </div>
+
+        <button class="btn tunnel-next" onclick="goTo('yes')">
+            CONTINUAR
+        </button>
+    </section>
+
+    <!-- SIM -->
+    <section class="scene romantic-scene" id="yes">
+        <div class="content">
+            <div class="mini-title">ENTÃO ERA VOCÊ</div>
+
+            <img
+                src="balbina5.jpg"
+                class="romantic-photo"
+                alt="Fotografia"
+            >
+
+            <h1>Se eu pudesse explicar exactamente o que sinto...</h1>
+
+            <p>
+                Entre tantas pessoas que poderiam ter cruzado o meu caminho,
+                foi você quem conseguiu transformar uma parte comum dos meus
+                dias em algo que comecei a esperar.
+            </p>
+
+            <p>
+                Eu tentei compreender isso como compreendo quase tudo:
+                pensando demais, procurando padrões, probabilidades e explicações.
+            </p>
+
+            <p>
+                Mas sentimentos não funcionam como uma equação.
+                Você simplesmente foi ocupando espaço.
+            </p>
+
+            <p class="pink">
+                Primeiro nos meus pensamentos. Depois nas minhas expectativas.
+                E, quando percebi, já estava dentro de mim.
+            </p>
+
+            <button class="btn" onclick="goTo('yes2')">CONTINUAR ❤️</button>
+        </div>
+    </section>
+
+    <!-- SEGUNDA MENSAGEM -->
+    <section class="scene romantic-scene" id="yes2">
+        <div class="content">
+            <img
+                src="balbina3.jpg"
+                class="romantic-photo"
+                alt="Fotografia"
+            >
+
+            <h1>Nem tudo precisa de uma explicação lógica.</h1>
+
+            <p>
+                Consigo compreender números, códigos e passar horas
+                a descobrir por que uma linha de programação falhou.
+            </p>
+
+            <p>
+                Mas quando se trata de você, toda a lógica parece falhar.
+            </p>
+
+            <div class="formula-card">
+                <div class="formula">lim (possibilidades) → ∞</div>
+
+                <div class="formula-description">
+                    Algumas coisas parecem não ter um limite.
+                </div>
+            </div>
+
+            <p class="pink">
+                E talvez eu não queira encontrar o limite desta possibilidade.
+            </p>
+
+            <button class="btn" onclick="goTo('infinity')">
+                MAIS UMA COISA
+            </button>
+        </div>
+    </section>
+
+    <!-- NÃO: VÍDEO -->
+    <section class="scene video-scene" id="no">
+        <video id="noVideo" class="scene-video" controls playsinline>
+            <source src="video-nao.mp4" type="video/mp4">
+        </video>
+
+        <button class="btn video-next" onclick="goTo('infinity')">
+            CONTINUAR
+        </button>
+    </section>
+
+    <!-- INFINITO -->
+    <section class="scene infinity-scene" id="infinity">
+        <div class="content">
+            <div class="mini-title">E TALVEZ SEJA ISSO</div>
+
+            <h1 class="infinity-symbol">∞</h1>
+
+            <h2>Infinito.</h2>
+
+            <p>
+                Talvez algumas histórias não precisem saber exactamente
+                onde começam nem onde terminam.
+            </p>
+
+            <p>
+                Como uma pergunta que continua encontrando novas respostas.
+                Como uma possibilidade que, mesmo depois de todas as outras
+                desaparecerem, continua existindo.
+            </p>
+
+            <p class="pink">
+                Não quero calcular onde termina. Quero descobrir.
+            </p>
+
+            <div class="final-heart">❤️</div>
+        </div>
+    </section>
+
+    <!-- ÁUDIO DE FUNDO -->
+    <audio id="music" src="music.mp3" loop preload="auto"></audio>
+
+    <!-- CONTROLO DA MÚSICA -->
+    <button
+        id="musicButton"
+        class="music-control"
+        onclick="toggleMusic()"
+        aria-label="Controlar música"
+    >
+        ♫
+    </button>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
